@@ -44,11 +44,22 @@ describe('Filter', () => {
             expect(filter.getEpisodeFromURL(url)).toBe('6');
         })
 
-        // it("Retorna somente Rick e Morty para o Ep 1", () => {
-        //     const response = filter.filterByEpisode('1', data.results);
-        //     expect(response.length).toBe(2);
-        //     expect(response[1]).toBe("Morty Smith");
-        // })
+        it("Retorna um array de números dos episódios", () => {
+            const personagem = data.results[6];
+            expect(personagem.name).toBe('Abradolf Lincler');
+            expect(filter.generateEpisodeList(personagem)).toEqual(['10', '11']);
+        })
+
+        it("Retorna um array de números dos episódios", () => {
+            const personagem = data.results[6];
+            const ricky = data.results[0];
+            const episodes = {
+                "10": [ricky],
+                "11": [ricky]
+            }
+            const response = filter.mapCharacterToEpisodes(episodes, personagem);
+            expect(response["10"].length).toBe(2);
+        })
     })
 
 })
